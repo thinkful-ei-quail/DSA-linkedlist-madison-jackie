@@ -52,35 +52,37 @@ class LinkedList {
       return;
     }
     const node = new _Node(item);
-    let current, previous;
-    current = this.head;
-    console.log(current)
-    while (current.value !== key) {
+    let previous;
+    let current = this.head;
+    console.log(current);
+    while (current && current.value !== key) {
       previous = current;
       current = current.next;
     }
+    if (!previous) {
+      this.insertFirst(item);
+    } else {
     node.next = current;
-    previous.next = node;
+    previous.next = node;}
   }
 
   insertAfter(item, key) {
     if (!key) {
-        return;
-      }
-      if (this.head === null) {
-        this.insertFirst(item);
-        return;
-      }
-      const node = new _Node(item);
-      let current, previous;
-      current = this.head;
-      console.log(current)
-      while (current.value !== key) {
-        previous = current;
-        current = current.next;
-      }
-      node.next = previous;
-      current.next = node;
+      throw "what key?";
+    }
+    if (this.head === null) {
+      throw "Key doesn't exist";
+    }
+    const node = new _Node(item);
+    let current = this.head;
+    while (current && current.value !== key) {
+      current = current.next;
+    }
+    if (!current) {
+      throw "key does not exist";
+    }
+    node.next = current.next;
+    current.next = node;
   }
 
   insertAt(item, index) {
