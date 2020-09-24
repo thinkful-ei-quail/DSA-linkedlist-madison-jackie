@@ -15,6 +15,48 @@ class LinkedList {
       current = current.next;
     }
   }
+  size() {
+    let current = this.head;
+    let count = 0;
+    while (current) {
+      current = current.next;
+      count++;
+    }
+    console.log(count);
+  }
+  isEmpty() {
+    if (this.head === null) {
+      console.log("true");
+    } else {
+      console.log("false");
+    }
+  }
+  findPrevious(item) {
+    let current = this.head;
+    let previous;
+    if(!item) {
+      throw 'must contain item'
+    }
+    if (!this.head) {
+      return null;
+    }
+    while (current.value !== item) {
+      if (current.next === null) {
+        return null;
+      } else {
+        previous = current;
+        current = current.next;
+      }
+    }
+    console.log(previous.value);
+  }
+  findLast() {
+    let current = this.head;
+    while(current.next !== null) {
+      current = current.next;
+    }
+    console.log(current.value)
+  }
   insertFirst(item) {
     this.head = new _Node(item, this.head);
     this.next = null;
@@ -54,7 +96,6 @@ class LinkedList {
     const node = new _Node(item);
     let previous;
     let current = this.head;
-    console.log(current);
     while (current && current.value !== key) {
       previous = current;
       current = current.next;
@@ -62,8 +103,9 @@ class LinkedList {
     if (!previous) {
       this.insertFirst(item);
     } else {
-    node.next = current;
-    previous.next = node;}
+      node.next = current;
+      previous.next = node;
+    }
   }
 
   insertAfter(item, key) {
