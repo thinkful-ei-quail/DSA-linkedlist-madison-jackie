@@ -8,6 +8,8 @@ class LinkedList {
   constructor() {
     this.head = null;
   }
+
+  //helper functions///////////////////////
   display() {
     let current = this.head;
     while (current) {
@@ -57,6 +59,8 @@ class LinkedList {
     }
     console.log(current.value)
   }
+////////////////////////////////////////////
+
   insertFirst(item) {
     this.head = new _Node(item, this.head);
     this.next = null;
