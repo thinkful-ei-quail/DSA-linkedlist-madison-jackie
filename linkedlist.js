@@ -8,10 +8,100 @@ class LinkedList {
   constructor() {
     this.head = null;
   }
-
+  display() {
+    let current = this.head;
+    while (current) {
+      console.log(current.value);
+      current = current.next;
+    }
+  }
   insertFirst(item) {
     this.head = new _Node(item, this.head);
     this.next = null;
+  }
+
+  findIndex(item) {
+    // Start at the head
+    let currNode = this.head;
+    let index = 0;
+    // If the list is empty
+    if (!this.head) {
+      return null;
+    }
+    // Check for the item
+    while (currNode.value !== item) {
+      /* Return null if it's the end of the list 
+               and the item is not on the list */
+      if (currNode.next === null) {
+        return null;
+      } else {
+        // Otherwise, keep looking
+        currNode = currNode.next;
+        index++;
+      }
+    }
+    // Found it
+    return index;
+  }
+  insertBefore(item, key) {
+    if (!key) {
+      return;
+    }
+    if (this.head === null) {
+      this.insertFirst(item);
+      return;
+    }
+    const node = new _Node(item);
+    let current, previous;
+    current = this.head;
+    console.log(current)
+    while (current.value !== key) {
+      previous = current;
+      current = current.next;
+    }
+    node.next = current;
+    previous.next = node;
+  }
+
+  insertAfter(item, key) {
+    if (!key) {
+        return;
+      }
+      if (this.head === null) {
+        this.insertFirst(item);
+        return;
+      }
+      const node = new _Node(item);
+      let current, previous;
+      current = this.head;
+      console.log(current)
+      while (current.value !== key) {
+        previous = current;
+        current = current.next;
+      }
+      node.next = previous;
+      current.next = node;
+  }
+
+  insertAt(item, index) {
+    if (index > 0 && index > this.size) {
+      return;
+    }
+    if (index === 0) {
+      this.insertFirst(item);
+      return;
+    }
+    const node = new _Node(item);
+    let current, previous;
+    current = this.head;
+    let count = 0;
+    while (count < index) {
+      previous = current;
+      count++;
+      current = current.next;
+    }
+    node.next = current;
+    previous.next = node;
   }
 
   insertLast(item) {
@@ -73,5 +163,4 @@ class LinkedList {
     previousNode.next = currNode.next;
   }
 }
-
 module.exports = LinkedList;
